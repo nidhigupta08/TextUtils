@@ -41,12 +41,52 @@ export default function TextForm(props) {
     setText(event.target.value)   // Update inputText state
    
   } 
-  
+
   const handleRemoveSpacesClick = () => {
     const newText = text.replace(/\s+/g, ' '); // Replace multiple spaces with single space
     setText(newText);
   };
 
+  const handleExtractNumberClick = () => {
+    const extractedNumbers = text.match(/\d+/g); // Regular expression to extract numbers
+    if (extractedNumbers) {
+      const numbersString = extractedNumbers.join(', '); // Join extracted numbers into a string
+      setText(numbersString);
+    } else {
+      alert('No numbers found in the input text.');
+    }
+  };
+
+  const handleReverseTextClick = () => {
+    const reversedText = text.split('').reverse().join('');
+    setText(reversedText);
+  };
+
+  const handleLineCountClick = () => {
+    const lineCount = text.split('\n').length;
+    setText(`Number of lines: ${lineCount}`);
+  };
+
+  const handleRemoveSpecialCharsClick = () => {
+    const removedSpecialCharsText = text.replace(/[^\w\s]/gi, '');
+    setText(removedSpecialCharsText);
+  };
+
+const handleEncryptTextClick = () => {
+    const encryptedText = text
+      .split('')
+      .map(char => String.fromCharCode(char.charCodeAt(0) + 1))
+      .join('');
+    setText(encryptedText);
+  };
+  
+  const handleDecryptTextClick = () => {
+    const decryptedText = text
+      .split('')
+      .map(char => String.fromCharCode(char.charCodeAt(0) - 1))
+      .join('');
+    setText(decryptedText);
+  };
   const handleClearClick = () => {
     setText('');
   };
@@ -76,7 +116,17 @@ export default function TextForm(props) {
   <button className='btn btn-outline-warning mx-2' onClick={handleSentenceCaseClick}> Convert to Sentence Case</button>
   <button className='btn btn-outline-danger mx-2' onClick={handleAltCaseClick}>Convert to Alternative Case</button>
   <button className='btn btn-outline-danger mx-2 my-2' onClick={handleRemoveSpacesClick}>Remove Extra Spaces</button>
-  <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
+  
+
+      <button className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
+
+      <button className="btn btn-outline-primary mx-2" onClick={handleReverseTextClick}>Reverse Text</button>
+      <button className="btn btn-outline-info mx-2" onClick={handleLineCountClick}>Count Lines</button>
+      <button className="btn btn-outline-secondary mx-2" onClick={handleRemoveSpecialCharsClick}>Remove Special Characters</button>
+      <button className="btn btn-outline-secondary mx-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
+       
+        <button className="btn btn-outline-warning mx-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
+      <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
   </div>
  
     </div>
