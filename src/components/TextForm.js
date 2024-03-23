@@ -87,6 +87,13 @@ const handleEncryptTextClick = () => {
       .join('');
     setText(decryptedText);
   };
+
+  const handleWordCountClick = () => {
+    const words = text.split(/\s+/).filter(word => word !== ''); // Split text by spaces and filter out empty strings
+    const wordCountText = `Word count: ${words.length}`;
+    setText(wordCountText);
+  };
+
   const handleClearClick = () => {
     setText('');
   };
@@ -126,6 +133,7 @@ const handleEncryptTextClick = () => {
       <button className="btn btn-outline-secondary mx-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
        
         <button className="btn btn-outline-warning mx-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
+        <button className="btn btn-outline-secondary mx-2" onClick={handleWordCountClick}>Count Words</button>
       <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
   </div>
  
