@@ -1,76 +1,98 @@
-import React,{ useState} from 'react'
+import React,{ useState,} from 'react'
 
 export default function TextForm(props) {
 
+  const handleGenerateRandomText = () => {
+    // Generate random text or Lorem Ipsum placeholder text
+    const randomText = loremIpsum(); // Call a function to generate Lorem Ipsum text
+    setText(randomText);
+    props.showAlert('Generated random text!', 'success');
+  };
+
+  const loremIpsum = () => {
+    // Lorem Ipsum text generator function
+    return 'Lorem ipsum dolor sit amet, 1234 consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 5678 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 91011';
+  };
+
   const handleUpClick=()=>{
-  //  console.log("Uppercase was clicked" + text);
-    //setText("you have clicked on handleUpChange");
-    let newText=text.toUpperCase();
-    setText(newText);
-  }
-  
-  const handleLoClick=()=>{
-    let lower_case=text.toLowerCase();
-    setText(lower_case);
-  }
+    //  console.log("Uppercase was clicked" + text);
+      //setText("you have clicked on handleUpChange");
+      let newText=text.toUpperCase();
+      setText(newText);
+      props.showAlert("Converted to uppercase!","success");
+    }
+    const handleLoClick=()=>{
+      let lower_case=text.toLowerCase();
+      setText(lower_case);
+      props.showAlert("Converted to lowercase!","success");
+    }
 
-  const handleTitleClick = () => {
-    let titleCase = text.toLowerCase().split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    setText(titleCase);
-  };
+    const handleTitleClick = () => {
+      let titleCase = text.toLowerCase().split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      setText(titleCase);
+      props.showAlert("Converted to titlecase!","success");
+    };
 
-  const handleSentenceCaseClick = () => {
-    let SentenceCase = text.toLowerCase().split('. ').map((sentence) => sentence.charAt(0).toUpperCase() + sentence.slice(1)).join('. ');
-    setText(SentenceCase);
-  };
+    const handleSentenceCaseClick = () => {
+      let SentenceCase = text.toLowerCase().split('. ').map((sentence) => sentence.charAt(0).toUpperCase() + sentence.slice(1)).join('. ');
+      setText(SentenceCase);
+      props.showAlert("Converted to sentencecase!","success");
+    };
 
-  const handleAltCaseClick = () => {
-    let AltCase = '';
-    for (let i = 0; i < text.length; i++) {
-      if (i % 2 === 0) {
-        AltCase += text.charAt(i).toUpperCase();
-      } else {
-        AltCase += text.charAt(i).toLowerCase();
+    const handleAltCaseClick = () => {
+      let AltCase = '';
+      for (let i = 0; i < text.length; i++) {
+        if (i % 2 === 0) {
+          AltCase += text.charAt(i).toUpperCase();
+        } else {
+          AltCase += text.charAt(i).toLowerCase();
+        }
       }
+      setText(AltCase);
+      props.showAlert("Converted to alternativecase!","success");
+    };
+
+      // Event handler for input change
+    const handleOnChange=(event)=>{
+      //console.log("on change");
+      setText(event.target.value)   // Update inputText state
+     
     }
-    setText(AltCase);
-  };
-    // Event handler for input change
-  const handleOnChange=(event)=>{
-    //console.log("on change");
-    setText(event.target.value)   // Update inputText state
-   
-  } 
+  
+    const handleRemoveSpacesClick = () => {
+      const newText = text.replace(/\s+/g, ' '); // Replace multiple spaces with single space
+      setText(newText);
+      props.showAlert("Removed whitespace!","success");
+    };
+  
+    const handleExtractNumberClick = () => {
+      const extractedNumbers = text.match(/\d+/g); // Regular expression to extract numbers
+      if (extractedNumbers) {
+        const numbersString = extractedNumbers.join(', '); // Join extracted numbers into a string
+        setText(numbersString);
+        props.showAlert("Extracted number!","success");
+      } else {
+        alert('No numbers found in the input text.');
+      }
+    };
 
-  const handleRemoveSpacesClick = () => {
-    const newText = text.replace(/\s+/g, ' '); // Replace multiple spaces with single space
-    setText(newText);
-  };
+    const handleReverseTextClick = () => {
+      const reversedText = text.split('').reverse().join('');
+      setText(reversedText);
+      props.showAlert("Converted to reverse!","success");
+    };
 
-  const handleExtractNumberClick = () => {
-    const extractedNumbers = text.match(/\d+/g); // Regular expression to extract numbers
-    if (extractedNumbers) {
-      const numbersString = extractedNumbers.join(', '); // Join extracted numbers into a string
-      setText(numbersString);
-    } else {
-      alert('No numbers found in the input text.');
-    }
-  };
+    const handleLineCountClick = () => {
+      const lineCount = text.split('\n').length;
+      setText(`Number of lines: ${lineCount}`);
 
-  const handleReverseTextClick = () => {
-    const reversedText = text.split('').reverse().join('');
-    setText(reversedText);
-  };
+    };
 
-  const handleLineCountClick = () => {
-    const lineCount = text.split('\n').length;
-    setText(`Number of lines: ${lineCount}`);
-  };
-
-  const handleRemoveSpecialCharsClick = () => {
-    const removedSpecialCharsText = text.replace(/[^\w\s]/gi, '');
-    setText(removedSpecialCharsText);
-  };
+    const handleRemoveSpecialCharsClick = () => {
+      const removedSpecialCharsText = text.replace(/[^\w\s]/gi, '');
+      setText(removedSpecialCharsText);
+      props.showAlert("Removed special character!","success");
+    };
 
 const handleEncryptTextClick = () => {
     const encryptedText = text
@@ -92,6 +114,12 @@ const handleEncryptTextClick = () => {
     const words = text.split(/\s+/).filter(word => word !== ''); // Split text by spaces and filter out empty strings
     const wordCountText = `Word count: ${words.length}`;
     setText(wordCountText);
+  };
+
+  const handleSortTextClick = () => {
+    const sortedText = text.split('\n').sort().join('\n');
+    setText(sortedText);
+    props.showAlert('Text sorted alphabetically!', 'success');
   };
 
   const handleClearClick = () => {
@@ -117,6 +145,9 @@ const handleEncryptTextClick = () => {
   </div>
 
   <div className='p-3'>
+  <button className='btn btn-outline-primary mx-2 my-2' onClick={handleGenerateRandomText}>
+              Generate Random Text
+            </button>
   <button className="btn btn-outline-success mx-2 " onClick={handleUpClick}>Convert to Upper Case</button>
   <button className="btn btn-outline-info" onClick={handleLoClick}> Convert to Lower Case</button>
   <button className='btn btn-outline-primary mx-2' onClick={handleTitleClick}>Convert to Title Case </button>
@@ -134,6 +165,9 @@ const handleEncryptTextClick = () => {
        
         <button className="btn btn-outline-warning mx-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
         <button className="btn btn-outline-secondary mx-2" onClick={handleWordCountClick}>Count Words</button>
+        <button className="btn btn-outline-primary mx-2" onClick={handleSortTextClick}>
+              Sort Text
+            </button>
       <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
   </div>
  
