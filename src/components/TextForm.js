@@ -2,6 +2,83 @@ import React,{ useState,} from 'react'
 
 export default function TextForm(props) {
 
+  const convertToRsText = () => {
+    const convertedText = text.replace(
+      /\b(Rs\.?|rs\.?|rs)\s*(\d+)\b/gi,
+      (match, prefix, number) => `${numberToWords(Number(number))} `
+    );
+    setText(convertedText);
+    props.showAlert('Converted Rs. numbers to text!', 'success');
+  };
+  const numberToWords = (number) => {
+    // Implement your logic to convert number to words here
+    // This is a simplified example. You may use libraries like num-words for more accurate conversion
+    const regex = /\b(Rs\.?|rs\.?|rs)\s*(\d+)\b/gi;
+
+    const convertToWords = (num) => {
+      // Define arrays for units, tens, and scales
+      const units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+      const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+      const scales = ['', 'Thousand', 'Million', 'Billion', 'Trillion'];
+
+      // Function to convert a group of 3 digits into words
+      const convertGroup = (num) => {
+        let result = '';
+
+        // Extract the hundreds place
+        const hundreds = Math.floor(num / 100);
+        if (hundreds > 0) {
+          result += units[hundreds] + ' Hundred ';
+          num %= 100;
+        }
+
+        // Extract the tens and units place
+        if (num > 0) {
+          if (num < 20) {
+            result += units[num] + ' ';
+          } else {
+            const tensPlace = Math.floor(num / 10);
+            result += tens[tensPlace] + ' ';
+            num %= 10;
+            if (num > 0) {
+              result += units[num] + ' ';
+            }
+          }
+        }
+
+        return result.trim();
+      };
+
+      // Function to convert a number to words
+      const convertToWords = (num) => {
+        if (num === 0) return 'Zero';
+
+        let result = '';
+        let groupCount = 0;
+
+        while (num > 0) {
+          const group = num % 1000;
+          if (group > 0) {
+            result = convertGroup(group) + scales[groupCount] + ' ' + result;
+          }
+          num = Math.floor(num / 1000);
+          groupCount++;
+        }
+
+        return result.trim();
+      };
+
+      return convertToWords(num);
+    };
+
+    // Use regex to find and replace numbers with their textual representation
+    const convertedText = text.replace(regex, (match, prefix, number) => {
+      return `${convertToWords(Number(number))} `;
+    });
+
+    return convertedText;
+};
+
   const handleGenerateRandomText = () => {
     // Generate random text or Lorem Ipsum placeholder text
     const randomText = loremIpsum(); // Call a function to generate Lorem Ipsum text
@@ -11,7 +88,7 @@ export default function TextForm(props) {
 
   const loremIpsum = () => {
     // Lorem Ipsum text generator function
-    return 'Lorem ipsum dolor sit amet, 1234 consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 5678 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 91011';
+    return 'Do not let perfectionism stall you. A small "Rs.200" error in a report can be fixed.  But mistakes happen everywhere - a rs.1,500 miscalculation on an invoice, a rs.75 mistake in ordering supplies. The key is to learn from them.  Fix the errors, adjust your approach, and keep moving forward. Progress, not perfection, is the path to success.';
   };
 
   const handleUpClick=()=>{
@@ -122,6 +199,13 @@ const handleEncryptTextClick = () => {
     props.showAlert('Text sorted alphabetically!', 'success');
   };
 
+  const handleCopy=()=>
+  {
+      var text=document.getElementById("myBox");
+      text.select();
+      navigator.clipboard.writeText(text.value);
+  }
+
   const handleClearClick = () => {
     setText('');
   };
@@ -148,6 +232,7 @@ const handleEncryptTextClick = () => {
   <button className='btn btn-outline-primary mx-2 my-2' onClick={handleGenerateRandomText}>
               Generate Random Text
             </button>
+  <button className="btn btn-outline-primary mx-2" onClick={convertToRsText}>Convert to Rs Text</button>         
   <button className="btn btn-outline-success mx-2 " onClick={handleUpClick}>Convert to Upper Case</button>
   <button className="btn btn-outline-info" onClick={handleLoClick}> Convert to Lower Case</button>
   <button className='btn btn-outline-primary mx-2' onClick={handleTitleClick}>Convert to Title Case </button>
@@ -168,6 +253,7 @@ const handleEncryptTextClick = () => {
         <button className="btn btn-outline-primary mx-2" onClick={handleSortTextClick}>
               Sort Text
             </button>
+      <button className='btn btn-outline-warning mx-2 my-2' onClick={handleCopy}>Copy to clipboard</button>
       <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
   </div>
  
