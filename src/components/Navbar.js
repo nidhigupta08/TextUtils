@@ -7,7 +7,7 @@ export default function Navbar(props) {
   return (
     //React, the expression " " (backticks with a space inside) is known as a template literal or template string.
     <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
-  <a className="navbar-brand" href="/">{props.title}</a>
+  <Link className="navbar-brand" to="/">{props.title}</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
