@@ -74,6 +74,42 @@ export default function TextForm(props) {
     return convertToWords(number);
   };
 
+// // Function to extract links from the text
+const extractLinks = () => {
+  const regex = /https?:\/\/[^\s]+/g;  // Regular expression for URLs (case-insensitive)
+  const extractedLinks = text.match(regex) || [];  // Match URLs, or return empty array if none found
+  let linksString = '';
+  if (extractedLinks.length > 0) {
+    linksString = extractedLinks.join('\n');  // Join extracted links with newlines
+  } else {
+    linksString = 'No links found in the text.';
+  }
+  setText(linksString);  // Update the state variable with the extracted links
+  props.showAlert('Extracted all links', 'success');
+};
+
+
+// Function to extract text from the input, excluding numbers and special characters
+// const extractText = () => {
+//   const extractedText = text.replace(/[^\w\s]/g, '').replace(/\s+/g, ' ');
+//   setText(extractedText);
+//   props.showAlert('Extracted the text', 'success');  // Display the extracted text in a success alert
+// };
+
+const extractText = () => {
+  const regex = /[a-zA-Z]+/g;  // Regular expression to match only alphabetic characters
+  const extractedText = text.match(regex);  // Match alphabetic characters
+  let extractedTextString = '';
+  if (extractedText && extractedText.length > 0) {
+    extractedTextString = extractedText.join(' ');  // Join extracted text with spaces
+  } else {
+    extractedTextString = 'No text found in the input.';
+  }
+  setText(extractedTextString);  // Update the state variable with the extracted text
+  props.showAlert('Extracted the text', 'success');  
+};
+
+
   const handleGenerateRandomText = () => {
     // Generate random text or Lorem Ipsum placeholder text
     const randomText = loremIpsum(); // Call a function to generate Lorem Ipsum text
@@ -83,8 +119,10 @@ export default function TextForm(props) {
 
   const loremIpsum = () => {
     // Lorem Ipsum text generator function
-    return 'Do not let perfectionism stall you. A small "Rs.15" error in a report can be fixed.  But mistakes happen everywhere - a "rs1,500" miscalculation on an invoice, a "rs.7000" mistake in ordering supplies. The key is to learn from them.  Fix the errors, adjust your approach, and keep moving forward. Progress, not perfection, is the path to success.';
+    return 'You are planning a grocery shopping trip and have a budget of Rs.1000. Here is what you need to buy. Rice: 10 kg bag costs Rs.250. Dal: 5 kg bag costs Rs.120. Cooking Oil: 1 liter bottle costs Rs.180 you need 2 bottles. Vegetables: You can allocate a variable amount for vegetables. Here i have one link "https://github.com/nidhigupta08 " and "https://www.linkedin.com/feed/ ", "https://gemini.google.com/app/dd95c2df4eb7df26 " .'
   };
+
+ 
 
   const handleUpClick = () => {
     //  console.log("Uppercase was clicked" + text);
@@ -93,6 +131,7 @@ export default function TextForm(props) {
     setText(newText);
     props.showAlert("Converted to uppercase!", "success");
   }
+
   const handleLoClick = () => {
     let lower_case = text.toLowerCase();
     setText(lower_case);
@@ -104,6 +143,7 @@ export default function TextForm(props) {
     setText(titleCase);
     props.showAlert("Converted to titlecase!", "success");
   };
+
 
   const handleSentenceCaseClick = () => {
     let SentenceCase = text.toLowerCase().split('. ').map((sentence) => sentence.charAt(0).toUpperCase() + sentence.slice(1)).join('. ');
@@ -153,14 +193,7 @@ export default function TextForm(props) {
     props.showAlert("Converted to reverse!", "success");
   };
 
-  const handleLineCountClick = () => {
-    // Use a regular expression to split the text by line breaks
-    const lines = text.split(/\r\n|\r|\n/).filter(line => line.trim() !== '');
-    console.log(lines); // Log the split text array
-    const lineCount = lines.length;
-    setText(`Number of lines: ${lineCount}`);
-  };
-  const handleRemoveSpecialCharsClick = () => {
+  const RemoveSpecialChar = () => {
     const removedSpecialCharsText = text.replace(/[^\w\s]/gi, '');
     setText(removedSpecialCharsText);
     props.showAlert("Removed special character!", "success");
@@ -188,18 +221,12 @@ export default function TextForm(props) {
     setText(wordCountText);
   };
 
-  const handleSortTextClick = () => {
-    const sortedText = text.split('\n').sort().join('\n');
-    setText(sortedText);
-    props.showAlert('Text sorted alphabetically!', 'success');
-  };
 
   const handleSelectAll = () => {
     var text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
   }
-
 
   const handleClearClick = () => {
     setText('');
@@ -224,27 +251,22 @@ export default function TextForm(props) {
           </div>
 
           <div className='p-3'>
-            <button className='btn btn-outline-primary mx-2 my-2' onClick={handleGenerateRandomText}> Generate Random Text</button>
-            <button className="btn btn-outline-primary mx-2" onClick={handleConvertToRsClick}>Convert to Rs Text</button>
-            <button className="btn btn-outline-success mx-2 " onClick={handleUpClick}>Convert to Upper Case</button>
+          <button className='btn btn-outline-primary mx-2 my-2' onClick={handleGenerateRandomText}> Generate Random Text</button>
+            <button className="btn btn-outline-success mx-2 my-2" onClick={handleUpClick}>Convert to Upper Case</button>
             <button className="btn btn-outline-info" onClick={handleLoClick}> Convert to Lower Case</button>
-            <button className='btn btn-outline-primary mx-2' onClick={handleTitleClick}>Convert to Title Case </button>
-            <button className='btn btn-outline-warning mx-2' onClick={handleSentenceCaseClick}> Convert to Sentence Case</button>
-            <button className='btn btn-outline-danger mx-2' onClick={handleAltCaseClick}>Convert to Alternative Case</button>
+            <button className='btn btn-outline-primary mx-2 my-2' onClick={handleTitleClick}>Convert to Title Case </button>
+            <button className='btn btn-outline-warning mx-2 my-2' onClick={handleSentenceCaseClick}> Convert to Sentence Case</button>
             <button className='btn btn-outline-danger mx-2 my-2' onClick={handleRemoveSpacesClick}>Remove Extra Spaces</button>
-            <button className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
-
-            <button className="btn btn-outline-primary mx-2" onClick={handleReverseTextClick}>Reverse Text</button>
-            <button className="btn btn-outline-info mx-2" onClick={handleLineCountClick}>Count Lines</button>
-            <button className="btn btn-outline-secondary mx-2" onClick={handleRemoveSpecialCharsClick}>Remove Special Characters</button>
-            <button className="btn btn-outline-secondary mx-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
-
-            <button className="btn btn-outline-warning mx-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
-            <button className="btn btn-outline-secondary mx-2" onClick={handleWordCountClick}>Count Words</button>
-            <button className="btn btn-outline-primary mx-2" onClick={handleSortTextClick}>
-              Sort Text
-            </button>
-           
+            <button className="btn btn-outline-secondary mx-2 my-2" onClick={RemoveSpecialChar}>Remove Special Characters</button>
+            <button className="btn btn-outline-secondary mx-2 my-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
+            <button className="btn btn-outline-warning mx-2 my-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
+            <button className="btn btn-outline-primary mx-2 my-2" onClick={handleReverseTextClick}>Reverse Text</button>
+            <button className='btn btn-outline-danger mx-2 my-2' onClick={handleAltCaseClick}>Convert to Alternative Case</button>
+            <button className='btn btn-outline-primary mx-2 my-2' onClick={extractText}>Extract All Text</button>
+            <button className="btn btn-outline-secondary mx-2 my-2" onClick={handleWordCountClick}>Count Words</button>
+          <button className='btn btn-outline-primary mx-2 my-2' onClick={extractLinks}>Extract Links</button>
+          <button className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
+            <button className="btn btn-outline-primary mx-2 my-2" onClick={handleConvertToRsClick}>Convert to Rs Text</button>
             <button className='btn btn-outline-primary mx-2 my-2' onClick={handleSelectAll}>Select All</button>
             <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
           </div>
@@ -253,10 +275,12 @@ export default function TextForm(props) {
 
         <div className="container my-3">
           <h1>Your summary</h1>
-          <p>{text.split(" ").length} words and {text.length} characters</p>
+
+ {/* In JavaScript, the filter() method creates a new array by applying a provided function to each element of the original array. .filter((element)=>{return element.length!=0}): This filters out any empty strings from the array of words. It checks each element (word) in the array and returns only those elements whose length is not equal to 0. */}
+          <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
           {/* Word Count	Slow (125 wpm)	Average (300 wpm)	Fast (450 wpm)    .1/125==0.008
          125 words	   1 minutes	      0.4 minutes	       0.3 minutes */}
-          <p>{0.008 * text.split(" ").length} minutes takes to read .</p>
+          <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes takes to read .</p>
         </div>
         <h3>Preview</h3>
         <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here."}</p>
