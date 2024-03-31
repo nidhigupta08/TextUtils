@@ -119,7 +119,7 @@ const extractText = () => {
 
   const loremIpsum = () => {
     // Lorem Ipsum text generator function
-    return 'You are planning a grocery shopping trip and have a budget of Rs.1000. Here is what you need to buy. Rice: 10 kg bag costs Rs.250. Dal: 5 kg bag costs Rs.120. Cooking Oil: 1 liter bottle costs Rs.180 you need 2 bottles. Vegetables: You can allocate a variable amount for vegetables. Here i have one link "https://github.com/nidhigupta08 " and "https://www.linkedin.com/feed/ ", "https://gemini.google.com/app/dd95c2df4eb7df26 " .'
+    return 'You are planning a grocery shopping trip and have a budget of Rs.1000. Here is what you need to buy. Rice: 10 kg bag costs Rs.250. Dal: 5 kg bag costs rs.120. Cooking Oil: 1 liter bottle costs rs180 you need 2 bottles. Vegetables: You can allocate a variable amount for vegetables. Here i have one link    "https://github.com/nidhigupta08 "     and     "https://www.linkedin.com/feed/ ", "https://gemini.google.com/app/dd95c2df4eb7df26 " .'
   };
 
  
@@ -245,45 +245,45 @@ const extractText = () => {
         <div className='container'  >
 
           <div className="form-group">
-            <h2 >{props.heading} </h2>
+            <h2 className='mb-4'>{props.heading} </h2>
             {/* without onChange fun i cannot able to write anything in the textbox. */}
             <textarea className="form-control" value={text} onChange={handleOnChange} style={{ backgroundColor: props.mode === 'dark' ? 'rgb(80 79 79)' : 'white', color: props.mode === 'light' ? 'black' : 'white' }} id="myBox" rows="8"></textarea>
           </div>
 
           <div className='p-3'>
-          <button className='btn btn-outline-primary mx-2 my-2' onClick={handleGenerateRandomText}> Generate Random Text</button>
-            <button className="btn btn-outline-success mx-2 my-2" onClick={handleUpClick}>Convert to Upper Case</button>
-            <button className="btn btn-outline-info" onClick={handleLoClick}> Convert to Lower Case</button>
-            <button className='btn btn-outline-primary mx-2 my-2' onClick={handleTitleClick}>Convert to Title Case </button>
-            <button className='btn btn-outline-warning mx-2 my-2' onClick={handleSentenceCaseClick}> Convert to Sentence Case</button>
-            <button className='btn btn-outline-danger mx-2 my-2' onClick={handleRemoveSpacesClick}>Remove Extra Spaces</button>
-            <button className="btn btn-outline-secondary mx-2 my-2" onClick={RemoveSpecialChar}>Remove Special Characters</button>
-            <button className="btn btn-outline-secondary mx-2 my-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
-            <button className="btn btn-outline-warning mx-2 my-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
-            <button className="btn btn-outline-primary mx-2 my-2" onClick={handleReverseTextClick}>Reverse Text</button>
-            <button className='btn btn-outline-danger mx-2 my-2' onClick={handleAltCaseClick}>Convert to Alternative Case</button>
-            <button className='btn btn-outline-primary mx-2 my-2' onClick={extractText}>Extract All Text</button>
-            <button className="btn btn-outline-secondary mx-2 my-2" onClick={handleWordCountClick}>Count Words</button>
-          <button className='btn btn-outline-primary mx-2 my-2' onClick={extractLinks}>Extract Links</button>
-          <button className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
-            <button className="btn btn-outline-primary mx-2 my-2" onClick={handleConvertToRsClick}>Convert to Rs Text</button>
-            <button className='btn btn-outline-primary mx-2 my-2' onClick={handleSelectAll}>Select All</button>
-            <button className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
+          <button className='btn btn-outline-primary mx-2 my-2'onClick={handleGenerateRandomText}>Generate Random Text</button>
+            <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-2" onClick={handleUpClick}>Convert to Upper Case</button>
+            <button disabled={text.length===0} className="btn btn-outline-info" onClick={handleLoClick}> Convert to Lower Case</button>
+            <button disabled={text.length===0} className='btn btn-outline-primary mx-2 my-2' onClick={handleTitleClick}>Convert to Title Case </button>
+            <button disabled={text.length===0} className='btn btn-outline-warning mx-2 my-2' onClick={handleSentenceCaseClick}> Convert to Sentence Case</button>
+            <button disabled={text.length===0} className='btn btn-outline-info mx-2 my-2' onClick={handleRemoveSpacesClick}>Remove Extra Spaces</button>
+            <button disabled={text.length===0} className="btn btn-outline-secondary mx-2 my-2" onClick={handleEncryptTextClick}>Encrypt Text</button>
+            <button disabled={text.length===0}  className="btn btn-outline-warning mx-2 my-2" onClick={handleDecryptTextClick}>Decrypt Text</button>
+            <button disabled={text.length===0} className="btn btn-outline-primary mx-2 my-2" onClick={handleReverseTextClick}>Reverse Text</button>
+            <button disabled={text.length===0} className="btn btn-outline-success mx-2 my-2" onClick={handleConvertToRsClick}>Convert to Rs Text</button>
+            <button disabled={text.length===0} className="btn btn-outline-secondary mx-2 my-2" onClick={RemoveSpecialChar}>Remove Special Characters</button>
+            <button disabled={text.length===0} className='btn btn-outline-primary mx-2 my-2' onClick={extractText}>Extract All Text</button>
+            <button disabled={text.length===0} className='btn btn-outline-danger mx-2 my-2' onClick={handleAltCaseClick}>Convert to Alternative Case</button>
+            <button disabled={text.length===0} className="btn btn-outline-secondary mx-2 my-2" onClick={handleWordCountClick}>Count Words</button>
+          <button disabled={text.length===0} className='btn btn-outline-primary mx-2 my-2' onClick={extractLinks}>Extract Links</button>
+          <button disabled={text.length===0} className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
+            <button disabled={text.length===0}  className='btn btn-outline-primary mx-2 my-2' onClick={handleSelectAll}>Select All</button>
+            <button disabled={text.length===0} className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
           </div>
 
         </div>
 
         <div className="container my-3">
-          <h1>Your summary</h1>
+          <h2>Your summary</h2>
 
  {/* In JavaScript, the filter() method creates a new array by applying a provided function to each element of the original array. .filter((element)=>{return element.length!=0}): This filters out any empty strings from the array of words. It checks each element (word) in the array and returns only those elements whose length is not equal to 0. */}
           <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
           {/* Word Count	Slow (125 wpm)	Average (300 wpm)	Fast (450 wpm)    .1/125==0.008
          125 words	   1 minutes	      0.4 minutes	       0.3 minutes */}
-          <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes takes to read .</p>
+          <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length!==0}).length} minutes takes to read .</p>
         </div>
         <h3>Preview</h3>
-        <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here."}</p>
+        <p>{text.length > 0 ? text : "Nothing to Preview"}</p>
       </div>
     </>
   )
