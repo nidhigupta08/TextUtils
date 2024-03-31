@@ -36,12 +36,6 @@ function App() {
   return (
  <>
 <Router>
-  {/* react do partial matching so  i m using exact otherwise even if i want comp2 it will give comp1.
-  /user--component1
-  //user/home--->component2.. 
-  */}
-
-  {/* <Navbar title="TextUtils" aboutText="About TextUtils"/> */}
 <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
 <Alert alert={alert}/>
 <div className="container my-3">
