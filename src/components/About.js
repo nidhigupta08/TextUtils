@@ -117,23 +117,27 @@ export default function About(props) {
                             <h6>In this section, I've outlined the diverse range of features I've incorporated into TextUtils for text manipulation. Each feature is designed to simplify and enhance your text editing experience, offering a variety of tools to suit your needs. Take a closer look to discover how TextUtils can streamline your text-related tasks and empower your creativity.</h6><br>
                             </br>
                             <ul>
-                                <li><strong>Convert to Lowercase:</strong> Transform your text to all lowercase letters.</li>
-                                <li><strong>Extract Links:</strong> Easily extract URLs from your text content.</li>
-                                <li><strong>Remove Whitespace:</strong> Eliminate unnecessary spaces from your text.</li>
-                                <li><strong>Reverse Text:</strong> Reverse the order of characters in your text.</li>
-                                <li><strong>Convert to Uppercase:</strong> Change your text to all uppercase letters.</li>
-                                <li><strong>Convert to Title Case:</strong> Capitalize the first letter of each word in your text.</li>
-                                <li><strong>Convert to Sentence Case:</strong> Capitalize the first letter of each sentence in your text.</li>
-                                <li><strong>Alternative Case Conversion:</strong> Alternate uppercase and lowercase letters in your text.</li>
-                                <li><strong>Encrypt Text:</strong> Encrypt your text using a cryptographic algorithm.</li>
-                                <li><strong>Decrypt Text:</strong> Decrypt encrypted text to its original form.</li>
-                                <li><strong>Convert to Rs Text:</strong> Convert your text to Indian Rupees format.</li>
-                                <li><strong>Remove Special Characters:</strong> Remove special characters from your text.</li>
-                                <li><strong>Extract Numbers:</strong> Extract numeric values from your text.</li>
-                                <li><strong>Extract All Text:</strong> Extract all text content from your input.</li>
-                                <li><strong>Select All:</strong> Select all text in the input area.</li>
-                                <li><strong>Clear All:</strong> Clear the input area and reset all transformations.</li>
+                            <li><strong><i class="fas fa-random"></i> Generate Random Text:</strong> This button generates random text or Lorem Ipsum placeholder text, which is useful for testing or filling content placeholders.</li>
+                                <li><strong><i class="fas fa-arrow-up"></i> Convert to Upper Case:</strong> Converts the input text to uppercase, making it easier to emphasize or highlight certain words or phrases.</li>
+                                <li><strong><i class="fas fa-arrow-down"></i> Convert to Lower Case:</strong> Converts the input text to lowercase, useful for standardizing text or making it easier to read.</li>
+                                <li><strong><i class="fas fa-heading"></i> Convert to Title Case:</strong> Capitalizes the first letter of each word in the text, commonly used for titles or headlines.</li>
+                                <li><strong><i class="fas fa-quote-right"></i> Convert to Sentence Case:</strong> Capitalizes the first letter of each sentence in the text, improving readability and formatting.</li>
+                                <li><strong><i class="fas fa-minus"></i> Remove Extra Spaces:</strong> Removes excess whitespace from the input text, ensuring clean and uniform formatting.</li>
+                                <li><strong><i class="fas fa-lock"></i> Encrypt Text:</strong> Encrypts the input text using a cryptographic algorithm, enhancing security and privacy for sensitive information.</li>
+                                <li><strong><i class="fas fa-unlock"></i> Decrypt Text:</strong> Decrypts encrypted text back to its original form, allowing access to protected content.</li>
+                                <li><strong><i class="fas fa-exchange-alt"></i> Reverse Text:</strong> Reverses the order of characters in the input text, offering a fun and creative way to transform text.</li>
+                                <li><strong><i class="fas fa-rupee-sign"></i> Convert to Rs Text:</strong> Converts numerical values in the text to Indian Rupees format, ideal for financial or currency-related content.</li>
+                                <li><strong><i class="fas fa-times"></i> Remove Special Characters:</strong> Removes special characters from the input text, ensuring clean and sanitized content.</li>
+                                <li><strong><i class="fas fa-file-alt"></i> Extract All Text:</strong> Extracts all text content from the input, excluding numbers and special characters, for further analysis or processing.</li>
+                                <li><strong><i class="fas fa-font"></i> Convert to Alternative Case:</strong> Alternates uppercase and lowercase letters in the text, creating a visually distinct and playful appearance.</li>
+                                <li><strong><i class="fas fa-file-word"></i> Count Words:</strong> Counts the total number of words in the input text, providing insights into its length and complexity.</li>
+                                <li><strong><i class="fas fa-link"></i> Extract Links:</strong> Extracts URLs from the text content, facilitating quick access to embedded links or references.</li>
+                                <li><strong><i class="fas fa-sort-numeric-up"></i> Extract Numbers:</strong> Extracts numeric values from the text, useful for data analysis or manipulation.</li>
+                                <li><strong><i class="fas fa-check-square"></i> Select All:</strong> Selects all text in the input area, simplifying text manipulation tasks or copying content for further use.</li>
+                                <li><strong><i class="fas fa-eraser"></i> Clear All:</strong> Clears the input area and resets all transformations, allowing for a fresh start or undoing previous changes.</li>
                             </ul>
+
+
 
                         </div>
                     </div>
