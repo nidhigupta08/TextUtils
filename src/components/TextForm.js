@@ -267,6 +267,7 @@ const extractText = () => {
             <button disabled={text.length===0} className="btn btn-outline-secondary mx-2 my-2" onClick={handleWordCountClick}>Count Words</button>
           <button disabled={text.length===0} className='btn btn-outline-primary mx-2 my-2' onClick={extractLinks}>Extract Links</button>
           <button disabled={text.length===0} className='btn btn-outline-info mx-2 my-2' onClick={handleExtractNumberClick}>Extract Numbers</button>
+        
             <button disabled={text.length===0}  className='btn btn-outline-primary mx-2 my-2' onClick={handleSelectAll}>Select All</button>
             <button disabled={text.length===0} className='btn btn-outline-danger mx-2 my-2' onClick={handleClearClick}>Clear All</button>
           </div>
